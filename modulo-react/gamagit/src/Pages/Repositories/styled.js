@@ -1,5 +1,11 @@
 import styled from 'styled-components';
 
+export const container = styled.div`
+    width: 100%;
+    max-width: 991px;
+    margin: 0 auto;
+`
+
 export const title = styled.h1`
     text-align:center;
     font-size: 2rem;
