@@ -26,7 +26,6 @@ export const button = styled.button`
         outline: none;
         box-shadow: none;
     }
-
 `
 
 export const container = styled.div`
