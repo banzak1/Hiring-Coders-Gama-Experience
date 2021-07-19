@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import * as S from './styled';
-
+import { useHistory } from 'react-router-dom';
 
 export default function Repositories() {
 
@@ -9,10 +9,16 @@ export default function Repositories() {
     useEffect(() => {
         
         let repositoriesName = localStorage.getItem('repositoriesName');
-        repositoriesName = JSON.parse(repositoriesName);
-        setRepositories(repositoriesName);
-        localStorage.clear();
+        if (repositoriesName != null) {
+            repositoriesName = JSON.parse(repositoriesName);
+            setRepositories(repositoriesName);
+            localStorage.clear();
+        } else {
+            history.pushState('/');
+        }
+
     }, []);
+
     return (
         <S.container>
         <S.title>Repositórios</S.title>
