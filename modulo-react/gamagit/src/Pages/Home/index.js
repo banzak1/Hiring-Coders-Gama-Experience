@@ -6,6 +6,7 @@ import { useHistory } from 'react-router-dom';
 function App(props) {
   const history = useHistory();
   const [ usuario, setUsuario ] = useState('');
+  const [ erro, setErro ] = useState(false);
 
   function handlePesquisa() {
     axios
@@ -17,16 +18,24 @@ function App(props) {
         repositoriesName.push(reposiory.name);
       })
       localStorage.setItem('repositoriesName', JSON.stringify(repositoriesName));
+      setErro(false);
       history.push('repositories');
+    })
+    .catch(err => {
+      setErro(true);
     });
   };
 
   return (
-
-    <S.container>
+    <S.HomeContainer>
+    <S.content>
       <S.input className="usuarioInput" placeholder="Usuário" value={usuario} onChange={e => setUsuario(e.target.value)} />
       <S.button type="button" onClick={handlePesquisa}>Pesquisar</S.button>
-    </S.container>
+      
+    </S.content>
+      { erro ? <S.errorMsg>Ocoreu um erro. Tente novamente!</S.errorMsg> : '' }
+      
+    </S.HomeContainer>
   );
 }
 
